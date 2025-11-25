@@ -25,7 +25,7 @@ def test_plotly(screen: Screen):
     screen.should_contain('Trace 1')
     screen.should_contain('Trace 2')
 
-
+o
 def test_replace_plotly(screen: Screen):
     @ui.page('/')
     def page():
