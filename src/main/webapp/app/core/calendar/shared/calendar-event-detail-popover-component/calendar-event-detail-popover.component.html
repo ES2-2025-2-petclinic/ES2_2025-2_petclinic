@@ -1,0 +1,41 @@
+<p-popover #popover (onHide)="onHide()" (onShow)="onShow()">
+    @let event = eventData();
+    @if (event) {
+        <div class="frame">
+            <div class="header">
+                <div>{{ event.title }}</div>
+                <button class="close-button" (click)="close()">
+                    <fa-icon [icon]="faXmark" />
+                </button>
+            </div>
+            <div class="info-row">
+                <div class="icon-frame">
+                    <fa-icon [icon]="event.icon" />
+                </div>
+                <div jhiTranslate="{{ event.eventTypeNameKey }}" data-testid="event-type-name-key"></div>
+            </div>
+            <div class="info-row" id="time-row">
+                <div class="icon-frame">
+                    <fa-icon [icon]="faClock" />
+                </div>
+                <div>{{ event.time }}</div>
+            </div>
+            @if (event.location) {
+                <div class="info-row" id="location-row">
+                    <div class="icon-frame">
+                        <fa-icon [icon]="faLocationDot" />
+                    </div>
+                    <div>{{ event.location }}</div>
+                </div>
+            }
+            @if (event.facilitator) {
+                <div class="info-row" id="facilitator-row">
+                    <div class="icon-frame">
+                        <fa-icon [icon]="faUser" />
+                    </div>
+                    <div>{{ event.facilitator }}</div>
+                </div>
+            }
+        </div>
+    }
+</p-popover>

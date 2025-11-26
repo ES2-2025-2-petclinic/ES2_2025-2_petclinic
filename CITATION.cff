@@ -1,17 +1,29 @@
-cff-version: 1.2.0
-message: If you use this software, please cite it as below.
 authors:
-  - family-names: Schindler
-    given-names: Falko
-    orcid: https://orcid.org/0009-0003-5359-835X
-  - family-names: Trappe
-    given-names: Rodja
-    orcid: https://orcid.org/0009-0009-4735-6227
-title: "NiceGUI: Web-based user interfaces with Python. The nice way."
-version: 3.0.0
-date-released: "2025-10-03"
-url: https://github.com/zauberzeug/nicegui
-doi: 10.5281/zenodo.7785516
-identifiers:
-  - description: DOI for this application's record on Zenodo
-    type: doi
+  -
+    affiliation: "Technische Universität München"
+    family-names: Krusche
+    given-names: Stephan
+cff-version: 1.2.0
+license: MIT
+message: "If you want to reference Artemis in your work, please cite this paper."
+repository-code: "https://github.com/ls1intum/Artemis/"
+title: "Artemis"
+preferred-citation:
+  type: conference-paper
+  authors:
+    -
+      affiliation: "Technische Universität München"
+      family-names: Krusche
+      given-names: Stephan
+    -
+      affiliation: "Technische Universität München"
+      family-names: Seitz
+      given-names: Andreas
+  title: "ArTEMiS: An Automatic Assessment Management System for Interactive Learning"
+  doi: "10.1145/3159450.3159602"
+  year: 2018
+  conference: "49th Technical Symposium on Computer Science Education"
+  publisher: ACM
+  pages: 6
+  start: 284
+  end: 289

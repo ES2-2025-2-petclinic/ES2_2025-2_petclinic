@@ -1,0 +1,70 @@
+@import '../../../../../../../node_modules/bootstrap/scss/functions';
+@import '../../../../../../../node_modules/bootstrap/scss/variables';
+@import '../../../../../../../node_modules/bootstrap/scss/mixins';
+@import '../../../../content/scss/artemis-mixins';
+
+.second-layer-modal-bg {
+    background-color: var(--secondary);
+}
+
+.scrollable-communication-content {
+    --channel-search-height: 59px;
+    @include dynamic-content-height(--header-height, --channel-search-height);
+    overflow-y: auto;
+}
+
+.message-input {
+    border-top: 1px solid;
+    border-color: var(--bs-border-color);
+}
+
+.communication-message-wrap {
+    min-width: 30%;
+}
+
+@include media-breakpoint-down(sm) {
+    .communication-content-sidebar {
+        position: absolute;
+        width: 100%;
+        z-index: 2;
+        pointer-events: none;
+
+        & .sidebar-wrap,
+        .communication-content-sidebar .sidebar-width {
+            max-width: 0;
+        }
+
+        &.sidebar-collapsed {
+            pointer-events: all;
+        }
+
+        &.sidebar-collapsed .sidebar-wrap,
+        &.sidebar-collapsed .sidebar-width {
+            max-width: 100%;
+        }
+
+        &.sidebar-collapsed .sidebar-width {
+            width: 100%;
+        }
+
+        .sidebar-content {
+            opacity: 0;
+        }
+
+        &.sidebar-collapsed .sidebar-content {
+            opacity: 1;
+        }
+
+        .sidebar-wrap {
+            margin-right: 0;
+        }
+    }
+
+    .communication-message-wrap.is-answer-thread-open {
+        display: none;
+    }
+
+    .communication-message-wrap {
+        max-width: 100%;
+    }
+}

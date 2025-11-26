@@ -1,0 +1,173 @@
+{
+    "error": {
+        "title": "Fehlerseite!",
+        "http": {
+            "400": "Ungültige Anfrage.",
+            "401": "Du bist nicht authentifiziert, um auf diese Seite zuzugreifen.",
+            "403": "Du hast nicht die nötigen Berechtigungen, um diese Seite anzuzeigen.",
+            "404": "Die Seite existiert nicht.",
+            "405": "Die verwendete Anfrage Methode ist für diese URL nicht erlaubt.",
+            "409": "Es gab einen Konflikt bei der Bearbeitung Deiner Anfrage.",
+            "500": "Interner Serverfehler."
+        },
+        "cannotDeleteYourself": "Du kannst nicht deinen eigenen Account löschen!",
+        "examExerciseNotIncludedInScore": "Eine Klausuraufgabe muss im Ergebnis enthalten sein!",
+        "fileUploadSavingError": "Fehler! Der Upload schlug fehl. Stelle sicher, dass eine Internetverbindung besteht!",
+        "concurrencyFailure": "Ein:e Nutzer:in hat diese Daten zeitgleich mit dir geändert. Deine Änderungen wurden abgelehnt.",
+        "validation": "Validierungsfehler auf dem Server.",
+        "resultStringNull": "Fehler! Ein Ergebnistext ist erforderlich.",
+        "resultStringTooLong": "Fehler! Der Ergebnistext ist zu lange (max. 255 Zeichen)",
+        "scoreNull": "Fehler! Eine Bewertung ist erforderlich.",
+        "resultNotRated": "Fehler! Ein Ergebnis muss bewertet sein.",
+        "submissionMissing": "Fehler! Die Abgabe ist nicht mehr mit dem Ergebnis verknüpft. Deine Änderungen wurden abgelehnt.",
+        "resultAlreadyExists": "Es liegt bereits ein Ergebnis für diese Übung vor.",
+        "scoreAndSuccessfulNotMatching": "Fehler! Nur ein Ergebnis mit 100 % kann erfolgreich sein.",
+        "feedbackDetailTextNull": "Fehler! Wenn Feedback vorhanden ist, müssen die Feedback Details ausgefüllt werden.",
+        "quizAlreadyVisible": "Das Quiz ist bereits sichtbar.",
+        "quizAlreadyStarted": "Das Quiz wurde bereits gestartet.",
+        "quizNotEndedYet": "Das Quiz hat noch nicht geendet.",
+        "quizAlreadyOpenForPractice": "Das Quiz ist bereits zur Übung geöffnet.",
+        "unknownAction": "Diese Aktion kann nicht durchgeführt werden.",
+        "groupNotFound": "Die von dir eingegebene Gruppe wurde nicht gefunden.",
+        "noLegalDocumentFile": "Das angeforderte Dokument konnte nicht gefunden werden.",
+        "emptyLegalDocument": "Das Impressum oder die Datenschutzerklärung darf nicht leer sein.",
+        "studentNotFound": "Studierende:r konnte in diesem Kurs nicht gefunden werden.",
+        "cantSaveFile": "Die hochgeladene Datei {{ fileName }} konnte nicht gespeichert werden.",
+        "emptyFile": "Die hochgeladene Datei {{ fileName }} ist leer. Bitte überprüfe die Datei und versuche es erneut.",
+        "externalSubmissionBeforeDueDate": "Externe Einreichungen können nur nach der Einreichungsfrist erstellt werden.",
+        "externalSubmissionForQuizExercise": "Externe Einreichungen können nicht für Quiz Übungen erstellt werden.",
+        "noSubmissions": "Nutzer:in existiert nicht oder es gibt keine Abgaben.",
+        "feedbackCreditsNull": "Fehler! Wenn Feedback vorhanden ist, muss das Feedback eine Punktzahl haben.",
+        "invalidGradeStepFormat": "Eine oder mehrere Notenstufen folgen nicht dem richtigen Format. Klicke auf das \"?\" für mehr Informationen.",
+        "invalidGradeStepAdjacency": "Die Notenstufen bilden keinen gültigen Notenschlüssel ab. Klicke auf das \"?\" für mehr Informationen.",
+        "emptyGradeSteps": "Die Notenstufen dürfen nicht leer sein. Klicke auf das \"?\" für mehr Informationen.",
+        "textSubmissionTooLong": "Text Abgaben können höchstens 30.000 Zeichen lang sein.",
+        "programmingExercisePolicyPresent": "Die Abgaberichtlinie konnte nicht zu der Programmieraufgabe hinzugefügt werden, da diese bereits eine Abgaberichtlinie hat.",
+        "submissionPolicyHasId": "Die Abgaberichtlinie konnte nicht zu der Programmieraufgabe hinzugefügt werden, da die Abgaberichtlinie bereits eine ID hat.",
+        "programmingExercisePolicyNotPresent": "Von der Programmieraufgabe konnte keine Abgaberichtlinie entfernt werden, da die Programmieraufgabe keine Richtlinie hat.",
+        "submissionPolicyAlreadyEnabled": "Die Abgaberichtlinie konnte nicht aktiviert werden, da diese bereits aktiviert ist.",
+        "submissionPolicyAlreadyDisabled": "Die Abgaberichtlinie konnte nicht deaktiviert werden, da diese bereits deaktiviert ist.",
+        "submissionPolicyToggleFailedPolicyNotExist": "Für diese Programmieraufgabe konnte die Abgaberichtlinie nicht (de)aktiviert werden, da die Programmieraufgabe keine Abgaberichtlinie hat. ",
+        "submissionPolicyActiveNull": "Abgaberichtlinien müssen aktiviert oder deaktiviert sein. Dieser Status darf nicht null sein.",
+        "submissionPolicyUpdateFailedPolicyNotExist": "Die Abgaberichtlinie konnte nicht gespeichert werden, da die Programmieraufgabe keine Abgaberichtlinie hat!",
+        "oneActivePlagiarismCheck": "Bitte warte bis die aktuelle Plagiatskontrolle in diesem Kurs abgeschlossen ist, bevor du eine weitere startest.",
+        "internalServerError": "Interner Serverfehler",
+        "server.not.reachable": "Server ist nicht erreichbar",
+        "url.not.found": "Nicht gefunden",
+        "NotNull": "Feld {{fieldName}} darf nicht leer sein!",
+        "size": "Feld {{fieldName}} erfüllt nicht die minimalen/maximalen Längenanforderungen!",
+        "userExists": "Login bereits vergeben!",
+        "emailExists": "E-Mail wird bereits verwendet!",
+        "idExists": "Ein neuer {{entityName}} kann noch keine ID haben",
+        "ambiguousContext": "Ein neuer {{entityName}} muss einen eindeutigen Kontext haben",
+        "invalid": {
+            "template": {
+                "build.plan.id": "Die Vorlagen-Build-Plan-ID scheint ungültig zu sein. Stelle bitte sicher, dass sie existiert und für Artemis zugänglich ist.",
+                "repository.url": "Die Vorlagen-Repository-URL scheint ungültig zu sein. Stelle bitte sicher, dass sie existiert und für Artemis zugänglich ist."
+            },
+            "solution": {
+                "build.plan.id": "Die Lösungs-Build-Plan-ID scheint ungültig zu sein. Stelle bitte sicher, dass sie existiert und für Artemis zugänglich ist.",
+                "repository.url": "Die Lösungs-Repository-URL scheint ungültig zu sein. Stelle bitte sicher, dass sie existiert und für Artemis zugänglich ist."
+            },
+            "student": {
+                "repository.url": "Die Studierenden-Repository-URL scheint ungültig zu sein. Stelle bitte sicher, dass sie existiert und für Artemis zugänglich ist."
+            },
+            "instructor": {
+                "repository.type": "{{repositoryType}} ist kein gültiger Instruktor-Repository-Typ. Nur {{validTypes}} sind erlaubt."
+            },
+            "auxiliary.repository": {
+                "id": "Die ID eines Hilfs-Repositories scheint gesetzt zu sein. Stelle bitte sicher, dass die ID nicht gesetzt ist.",
+                "name": "Der Name von mindestens einem Hilfs-Repository ist ungültig oder dupliziert. Stelle bitte sicher, dass jeder Name gültig ist und es keine Duplikate gibt.",
+                "checkout.directory": "Das Checkout-Verzeichnis von mindestens einem Hilfs-Repository ist ungültig oder dupliziert. Stelle bitte sicher, dass jedes Checkout-Verzeichnis gültig ist und es keine Duplikate gibt.",
+                "description": "Die Beschreibung von mindestens einem Hilfs-Repository ist zu lang! Es sind maximal {{maxLength}} Zeichen erlaubt."
+            },
+            "testcases.weights": "Vor Deaktivierung der manuellen Bewertung muss für mindestens einen Testfall die Bewertungsgewichtung größer Null gesetzt werden.",
+            "page.request": "Die Seitenanforderung scheint ungültig zu sein. Stelle bitte sicher, dass genügend {{entityName}}-Entitäten vorhanden sind, damit die Anforderungsseite erstellt werden kann.",
+            "presentations": {
+                "maxNumberOfPresentationsExceeded": "{{name}} hielt bereits die maximale Anzahl von {{presentationsNumber}} Präsentation/en."
+            }
+        },
+        "idNull": "Ungültige ID",
+        "noExerciseIdForQuestion": "Keine Aufgaben-ID für die aktuelle Frage gefunden.",
+        "unexpectedError": "Ein unerwarteter Fehler ist aufgetreten: {{error}}",
+        "exerciseNotDefined": "Die Aufgabe ist nicht definiert.",
+        "exerciseIdMismatch": "Die Aufgaben-IDs stimmen nicht überein.",
+        "solutionEntryError": "Fehler beim Laden der extrahierten Aufgaben aus der Aufgabenstellung.",
+        "systemNotificationNeedsBothDates": "Sowohl das Mitteilungsdatum als auch das Ablaufdatum müssen gesetzt sein.",
+        "systemNotificationNeedsNotificationBeforeExpiration": "Das Ablaufdatum muss nach dem Mitteilungsdatum liegen.",
+        "ltiNotSupported": "LTI wird auf dieser Artemis-Instanz nicht unterstützt",
+        "exportFailed": "Aufgabenexport fehlgeschlagen",
+        "unableToImportProgrammingExercise": "Fehler beim Importieren der Programmieraufgabe.",
+        "titleAlreadyExists": "Es existiert bereits eine Programmieraufgabe mit demselben Titel, bitte nutze einen anderen Titel.",
+        "shortnameAlreadyExists": "Es existiert bereits eine Programmieraufgabe mit demselben Kurznamen, bitte nutze einen anderen Kurznamen.",
+        "courseTitleTooLong": "Der Kurstitel ist zu lang (max. 255 Zeichen), bitte nutze einen kürzeren Kurstitel.",
+        "courseIdUndefined": "Die Kurs-ID ist nicht definiert, bitte stelle sicher, dass der Kurs existiert.",
+        "notAllowedInExam": "Diese Aktion ist in einer Klausur nicht erlaubt.",
+        "profilePictureFilesizeTooBig": "Die Dateigröße des hochgeladenen Bilds ist zu groß, bitte lade ein kleineres Bild hoch.",
+        "profilePictureFileFormatNotSupported": "Das Dateiformat wird nicht unterstützt, bitte lade eine .png oder .jpg Datei hoch.",
+        "envVariablesTooLong": "Die Umgebungsvariablen sind zu lang. Bitte stelle sicher, dass jeder Schlüssel oder Wert nicht länger als 1000 Zeichen ist.",
+        "memoryLimitInvalid": "Die Speicherbegrenzung ist ungültig. Bitte stelle sicher, dass es sich um eine positive Ganzzahl handelt und größer als 6MB ist.",
+        "cpuCountInvalid": "Die CPU-Anzahl ist ungültig. Bitte stelle sicher, dass es sich um eine positive Ganzzahl handelt.",
+        "memorySwapLimitInvalid": "Die maximale Swap-Speichergröße ist ungültig. Bitte stelle sicher, dass er größer oder gleich 0 ist.",
+        "dockerFlagsParsingError": "Fehler beim Parsen der Docker-Flags.",
+        "dueDateOver": {
+            "noParticipationPossible": "Das Abgabedatum der Übung ist bereits abgelaufen, du kannst nicht mehr an dieser Übung teilnehmen.",
+            "participationInPracticeMode": "Das Abgabedatum der Übung ist bereits abgelaufen, eine reguläre Teilnahme an der Übung ist nicht mehr möglich. Du kannst den Übungsmodus verwenden, um die Übung zu lösen."
+        },
+        "teamExercise": {
+            "cannotStart": "Teamübung kann nicht ohne zugewiesenes Team gestartet werden."
+        },
+        "assignmentRepositoryNotAllowed": "Assignment-Repositories werden für Klausuraufgaben nicht unterstützt. Bitte nutze stattdessen das Testlauf-Feature, um die Aufgabe auszuprobieren.",
+        "room": {
+            "fileEmpty": "Die hochgeladene Datei enthält keinen Inhalt",
+            "fileTooLarge": "Die hochgeladene Datei überschreitet die maximal zulässige Dateigröße von {{ maxSize }}",
+            "malformedJson": "Konnte {{ roomNumber }} nicht verarbeiten, der JSON Inhalt scheint falsch formatiert zu sein",
+            "missingRoomNumber": "Fehlende Raumnummer. Bitte stelle sicher, dass keine .json Datei einen leeren Namen hat",
+            "parseIoException": "Ein interner Fehler ist aufgetreten: {{ errorMessage }}",
+            "missingNameOrBuilding": "Raum {{ roomNumber }} spezifiziert keinen Raumnamen und/oder Gebäude",
+            "missingSeats": "Konnte die Sitze von Raum {{ roomNumber }} nicht verarbeiten",
+            "malformedRow": "Raum {{ roomNumber }} hat eine fehlende oder anderweitig fehlerhafte Reihe",
+            "malformedSeat": "Raum {{ roomNumber }} hat einen fehlenden oder anderweitig fehlerhaften Sitz",
+            "invalidSeatCondition": "Raum {{ roomNumber }} hat einen unbekannten Sitz-Zustand: '{{ seatCondition }}'",
+            "missingLayouts": "Konnte die Layouts von Raum {{ roomNumber }} nicht verarbeiten",
+            "malformedLayout": "Layout {{ layoutName }} ist fehlerhaft in Raum {{ roomNumber }}",
+            "unknownLayoutType": "Unbekannter Layout-Typ '{{ layoutType }}' in Layout '{{ layoutName }}' in Raum {{ roomNumber }}",
+            "invalidLayout": "Das Layout {{ layoutName }} in Raum {{ roomNumber }} ist fehlerhaft",
+            "seatNotFoundFixedSelection": "Der Sitz mit Reihenindex {{ rowIndex }} und Sitzindex {{ seatIndex }} in Raum {{ roomNumber }} existiert nicht",
+            "missingDefaultLayout": "Der Raum {{ roomNumber }} hat kein Standardlayout ('default')",
+            "missingSpecifiedLayout": "Der Raum {{ roomNumber }} hat kein Layout namens {{ layoutName }}"
+        },
+        "examUser": {
+            "service": {
+                "multipleExams": "Alle Klausurteilnehmer müssen zur selben Klausur gehören, aber aktuell gehören sie zu {{ foundExams }} verschiedenen Klausuren"
+            }
+        },
+        "notEnoughExamSeats": "Die ausgewählten Räume haben nur Kapazität für {{ numberOfUsableSeats }} der {{ numberOfExamUsers }} Klausurteilnehmer",
+        "reserveFactorOutOfRange": "Der Reservierungsfaktor muss zwischen 0 und 1 sein",
+        "noRoomIDs": "Du hast keine Räume ausgewählt",
+        "invalidRoomIDs": "Mindestens einer der Räume, die du ausgewählt hast, existiert nicht oder ist veraltet",
+        "noStudentDistributed": "Keinem der Klausurteilnehmer wurde ein Raum und Sitz zugewiesen",
+        "wrongCourse": "Die Reaktion gehört nicht zum ausgewählten Kurs.",
+        "reactionNotFound": "Die Reaktion konnte nicht gefunden werden.",
+        "missingAssociation": "Die Reaktion muss einem Beitrag oder einer Antwort zugeordnet sein.",
+        "emojiIdMissing": "emojiId muss gesetzt sein.",
+        "exampleSubmission": {
+            "isNull": "Es wurde keine Beispielabgabe übermittelt.",
+            "submissionIsNull": "Diese Beispielabgabe enthält keine Lösung.",
+            "submissionIdMissing": "Die Abgabe muss zuerst gespeichert werden, bevor sie umgewandelt werden kann."
+        },
+        "exerciseVersionIdMismatch": "Die angeforderte Übungsversion gehört nicht zur angegebenen Übungs-ID.",
+        "submissionExerciseMismatch": "Die Abgabe gehört nicht zur angegebenen Aufgabe.",
+        "maxAthenaResultsReached": "Maximale Anzahl an KI-Feedback-Anfragen erreicht.",
+        "submissionAlreadyHasAthenaResult": "Die Abgabe hat bereits ein Athena-Ergebnis.",
+        "missingFeedbackSuggestionModule": "Die Aufgabe hat kein Feedback-Vorschlagsmodul konfiguriert.",
+        "examExerciseNoAccessToAthena": "Klausuraufgaben haben keinen Zugriff auf Athena.",
+        "noAccessToAthenaModule": "Die Aufgabe hat keinen Zugriff auf das ausgewählte Athena-Modul.",
+        "athenaModuleChangeAfterDueDate": "Das Athena-Modul kann nach Ablauf der Abgabefrist nicht mehr geändert werden.",
+        "passkeyAuth": {
+            "notAuthenticatedWithPasskey": "Du bist nicht mit einem Passkey authentifiziert. Bitte authentifiziere dich mit einem Passkey, um auf diese Ressource zuzugreifen.",
+            "notSuperAdminApproved": "Dein Passkey ist nicht von einem Super-Admin freigegeben. Bitte überprüfe in den Nutzereinstellungen, ob dein Passkey von einem Super-Admin freigegeben wurde und melde dich erneut mit dem entsprechendem Passkey an.",
+            "loginRequiredButFeatureNotEnabled": "Für diese Funktion ist ein Passkey-Login erforderlich. Allerdings ist die Passkey-Authentifizierung auf dieser Artemis-Instanz nicht aktiviert. Bitte aktiviere die Passkey-Authentifizierung auf dieser Artemis Instanz."
+        }
+    }
+}

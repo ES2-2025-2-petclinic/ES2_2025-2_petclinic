@@ -1,3 +1,0 @@
-nicegui>=3.0
-pytest-asyncio
-pytest-selenium

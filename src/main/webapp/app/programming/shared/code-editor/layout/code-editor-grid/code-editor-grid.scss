@@ -1,0 +1,344 @@
+/* ==========================================================================
+   Code-Editor Layout
+   ========================================================================== */
+
+.editor-wrapper {
+    display: grid;
+    grid-template-rows: min-content auto auto;
+    row-gap: 10px;
+    max-height: 100vh;
+    overflow: hidden;
+
+    .collapsed--horizontal {
+        width: 50px !important;
+    }
+
+    .collapsed--vertical {
+        height: 42px !important;
+    }
+
+    .editor-statusbar {
+        padding: 0.5rem 0;
+    }
+
+    .editor-main {
+        display: grid;
+        grid-template-rows: auto auto;
+        height: 500px;
+        margin-bottom: 10px;
+
+        &__content {
+            display: flex;
+            height: inherit;
+            min-width: 0; /* allow middle strip to shrink */
+
+            .editor-sidebar-left {
+                flex: 0 1 auto;
+                display: flex;
+                width: 310px;
+
+                > *:first-child {
+                    flex: 1 1 auto;
+                    width: 90%;
+                }
+            }
+        }
+
+        .editor-center {
+            flex: 1 1 auto;
+            min-width: 0; /* let center shrink */
+
+            .card {
+                height: 100%;
+            }
+        }
+
+        .editor-sidebar-right {
+            flex: 0 1 auto;
+            display: flex;
+            flex-flow: row nowrap;
+            width: 500px;
+
+            .instructions-wrapper__content {
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                flex-basis: 100px;
+            }
+
+            > *:last-child {
+                flex: 1 1 auto;
+                width: 90%;
+            }
+        }
+    }
+
+    .editor-bottom {
+        flex: 1 1 auto;
+        display: flex;
+        flex-flow: column nowrap;
+        height: 200px;
+        max-height: calc(100vh - 550px);
+        overflow: auto;
+
+        /* Hide grip when bottom area is empty */
+        .rg-bottom-bottom {
+            display: none;
+        }
+
+        > * + .rg-bottom-bottom {
+            display: inherit !important;
+        }
+
+        > * {
+            height: inherit;
+        }
+    }
+}
+
+/* ==========================================================================
+   Collapsible styling
+   ========================================================================== */
+
+/* File browser */
+.editor-sidebar-left.collapsed--horizontal {
+    flex: none !important;
+
+    .card-header {
+        height: 100%;
+        width: 100%;
+
+        > fa-icon {
+            display: none;
+        }
+    }
+
+    .card-body,
+    .card-second-header {
+        display: none !important;
+    }
+
+    .collapsed-file-browser {
+        width: 50px;
+        cursor: pointer;
+
+        .header {
+            writing-mode: vertical-lr;
+            transform: rotate(180deg);
+            position: absolute;
+            top: 27%;
+            left: 25%;
+        }
+
+        fa-icon {
+            position: absolute;
+            left: 15px;
+        }
+
+        .top-icon {
+            top: 15px;
+        }
+
+        #panel-symbol {
+            position: absolute;
+            top: 66%;
+            left: 25%;
+            padding-right: 0 !important;
+        }
+
+        .bottom-icon {
+            bottom: 15px;
+        }
+    }
+}
+
+.editor-sidebar-left:not(.collapsed--horizontal) {
+    .code-editor-status {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(max-content, 1fr));
+        column-gap: 10px;
+
+        > :not(:first-child) {
+            border-left: 1px solid rgba(0, 0, 0, 0.125);
+            padding-left: 20px;
+        }
+    }
+}
+
+.editor-sidebar-left.collapsed--horizontal {
+    .code-editor-status {
+        > :not(:last-child) {
+            padding-bottom: 5px;
+        }
+
+        > :not(:first-child) {
+            padding-top: 5px;
+            border-top: 1px solid rgba(0, 0, 0, 0.125);
+        }
+
+        span {
+            display: none !important;
+        }
+    }
+}
+
+/* Instructions (right pane) */
+.editor-sidebar-right.collapsed--horizontal {
+    flex: none !important;
+
+    .card-header {
+        height: 100%;
+        width: 100%;
+
+        > fa-icon {
+            display: none;
+        }
+    }
+
+    .instructions-wrapper__content {
+        height: auto !important;
+
+        .editable-instruction-container__save,
+        .editable-instruction-container__editor {
+            display: none;
+        }
+    }
+
+    .card-second-header {
+        display: none !important;
+    }
+
+    .collapsed-instructions-card {
+        width: 50px;
+        cursor: pointer;
+
+        .header {
+            writing-mode: vertical-lr;
+            position: absolute;
+            top: 29%;
+            left: 25%;
+        }
+
+        fa-icon {
+            position: absolute;
+            right: 15px;
+        }
+
+        .top-icon {
+            top: 15px;
+        }
+
+        #panel-symbol {
+            position: absolute;
+            top: 18%;
+            left: 40%;
+            padding-right: 0 !important;
+        }
+
+        .bottom-icon {
+            bottom: 15px;
+        }
+    }
+
+    /* Hide status area when collapsed */
+    .editable-instruction-container__status {
+        display: none !important;
+    }
+
+    .instructions__content {
+        height: auto;
+    }
+}
+
+/* Build output */
+.editor-bottom.collapsed--vertical .card-body {
+    display: none;
+}
+
+/* ==========================================================================
+   Resizable drag elements
+   ========================================================================== */
+
+/* stylelint-disable no-descending-specificity -- These selectors are used in different contexts */
+.rg-main-bottom,
+.rg-bottom-bottom,
+.rg-sidebar-left,
+.rg-sidebar-right {
+    align-self: center;
+    color: var(--code-editor-grid-grip-lines-color);
+    justify-self: center;
+    font-size: 0.7rem;
+    opacity: 1;
+    transition: opacity 0.2s;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+/* stylelint-enable no-descending-specificity */
+
+.rg-main-bottom {
+    cursor: row-resize;
+}
+
+.rg-sidebar-left,
+.rg-sidebar-right {
+    cursor: col-resize;
+    margin-left: 0;
+    margin-right: 0;
+
+    /* easier to grab + avoid selecting editor text while dragging */
+    padding: 0 0;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: none;
+    z-index: 3;
+}
+
+.separator {
+    margin: 0;
+}
+
+/* ==========================================================================
+   Problem Statement (center) – keep content inside the card and allow shrink
+   ========================================================================== */
+
+/* allow all layers in the center to shrink instead of pushing the right pane */
+.editor-wrapper .editor-main .editor-center .instructions-wrapper,
+.editor-wrapper .editor-main .editor-center .instructions-wrapper__content,
+.editor-wrapper .editor-main .editor-center .editable-instruction-container,
+.editor-wrapper .editor-main .editor-center .editable-instruction-container > jhi-markdown-editor-monaco {
+    min-width: 0;
+}
+
+/* contain the markdown editor’s inner flow (it defaults to overflow: visible) */
+.editor-wrapper .editor-main .editor-center jhi-markdown-editor-monaco .markdown-editor-wrapper {
+    overflow: hidden !important;
+}
+
+/* vertical sizing for the editable-instructions stack */
+.editor-wrapper .editor-main .editor-center .instructions-wrapper {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.editor-wrapper .editor-main .editor-center .instructions-wrapper__content {
+    min-height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.editor-wrapper .editor-main .editor-center .editable-instruction-container {
+    height: 100%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.editor-wrapper .editor-main .editor-center .editable-instruction-container jhi-markdown-editor-monaco {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+}

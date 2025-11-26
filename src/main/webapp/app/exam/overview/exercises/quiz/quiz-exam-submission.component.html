@@ -1,0 +1,105 @@
+<div class="d-flex justify-content-between align-items-center">
+    <h3 class="text-align-left fw-normal mb-0">
+        <span>
+            {{ quizConfiguration().exerciseGroup?.title }}
+        </span>
+        <span jhiTranslate="artemisApp.examParticipation.points" [translateValues]="{ points: quizConfiguration().maxPoints }"></span>
+        @if (quizConfiguration().includedInOverallScore !== IncludedInOverallScore.INCLUDED_COMPLETELY) {
+            <jhi-included-in-score-badge [includedInOverallScore]="quizConfiguration().includedInOverallScore" />
+        }
+    </h3>
+    <jhi-exercise-save-button [submission]="studentSubmission()" (save)="notifyTriggerSave()" />
+</div>
+<hr />
+
+<!-- TODO this is duplicated with quiz-participation.component.html, we should add a shared component merging bought approaches instead of copy pasting things -->
+<div class="row m-0">
+    @if (quizConfiguration().quizQuestions) {
+        @if (!examTimeline()) {
+            <div class="col-md-auto ps-0">
+                <div class="p-0 col-md-auto quiz-navigation stepwizardquiz sticky-top-stepwizard sticky-top-quiz hide-scrollbar-unless-scrolling">
+                    @for (question of quizConfiguration().quizQuestions; track question; let i = $index) {
+                        <div class="stepwizardquiz__step mb-3" [class.mb-3]="!$last">
+                            @if (question.type === DRAG_AND_DROP) {
+                                <span
+                                    class="btn btn-light btn-circle draganddropcolor-question"
+                                    (click)="navigateToQuestion(question.id!)"
+                                    [ngbTooltip]="!!dragAndDropMappings.get(question.id!)?.length ? tooltipExplanationTranslate : tooltipNotExplanationTranslate"
+                                    [ngClass]="!!dragAndDropMappings.get(question.id!)?.length ? 'changed-question' : ''"
+                                >
+                                    <b class="fa">DD</b>
+                                </span>
+                            }
+                            @if (question.type === MULTIPLE_CHOICE) {
+                                <span
+                                    class="btn btn-light btn-circle multiplechoicecolor-question"
+                                    (click)="navigateToQuestion(question.id!)"
+                                    [ngbTooltip]="!!selectedAnswerOptions.get(question.id!)?.length ? tooltipExplanationTranslate : tooltipNotExplanationTranslate"
+                                    [ngClass]="!!selectedAnswerOptions.get(question.id!)?.length ? 'changed-question' : ''"
+                                >
+                                    <b class="fa">MC</b>
+                                </span>
+                            }
+                            @if (question.type === SHORT_ANSWER) {
+                                <span
+                                    class="btn btn-light btn-circle shortanswercolor-question"
+                                    (click)="navigateToQuestion(question.id!)"
+                                    [ngbTooltip]="!!shortAnswerSubmittedTexts.get(question.id!)?.length ? tooltipExplanationTranslate : tooltipNotExplanationTranslate"
+                                    [ngClass]="!!shortAnswerSubmittedTexts.get(question.id!)?.length ? 'changed-question' : ''"
+                                >
+                                    <b class="fa">SA</b>
+                                </span>
+                            }
+                            <ng-template #tooltipExplanationTranslate>{{ 'artemisApp.quizExercise.explanationAnswered' | artemisTranslate }} </ng-template>
+                            <ng-template #tooltipNotExplanationTranslate>{{ 'artemisApp.quizExercise.explanationNotAnswered' | artemisTranslate }} </ng-template>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+
+        <div class="col p-0 quiz-content mb-3">
+            @for (question of quizConfiguration().quizQuestions; track question; let i = $index) {
+                <div>
+                    <!-- TODO: Map vs Array consistency -->
+                    @if (question.type === MULTIPLE_CHOICE) {
+                        <jhi-multiple-choice-question
+                            id="question{{ question.id }}"
+                            [question]="question"
+                            [selectedAnswerOptions]="selectedAnswerOptions.get(question.id!)!"
+                            (selectedAnswerOptionsChange)="selectedAnswerOptions.set(question.id!, $event)"
+                            [fnOnSelection]="onSelectionChanged.bind(this)"
+                            [quizQuestions]="quizConfiguration().quizQuestions"
+                            [questionIndex]="i + 1"
+                            [clickDisabled]="readonly()"
+                        />
+                    }
+                    <!-- TODO: Map vs Array consistency -->
+                    @if (question.type === DRAG_AND_DROP) {
+                        <jhi-drag-and-drop-question
+                            id="question{{ question.id }}"
+                            [question]="question"
+                            [mappings]="dragAndDropMappings.get(question.id!)!"
+                            (mappingsChange)="dragAndDropMappings.set(question.id!, $event)"
+                            [onMappingUpdate]="onSelectionChanged.bind(this)"
+                            [questionIndex]="i + 1"
+                            [clickDisabled]="readonly()"
+                        />
+                    }
+                    <!-- TODO: Map vs Array consistency -->
+                    @if (question.type === SHORT_ANSWER) {
+                        <jhi-short-answer-question
+                            id="question{{ question.id }}"
+                            [question]="question"
+                            [submittedTexts]="shortAnswerSubmittedTexts.get(question.id!)!"
+                            (submittedTextsChange)="shortAnswerSubmittedTexts.set(question.id!, $event)"
+                            [fnOnSubmittedTextUpdate]="onSelectionChanged.bind(this)"
+                            [questionIndex]="i + 1"
+                            [clickDisabled]="readonly()"
+                        />
+                    }
+                </div>
+            }
+        </div>
+    }
+</div>

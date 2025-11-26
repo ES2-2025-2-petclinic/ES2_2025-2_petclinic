@@ -1,0 +1,40 @@
+<div class="frame">
+    <div class="header">
+        @for (weekdayNameKey of weekdayNameKeys; track weekdayNameKey) {
+            <div class="day-name" jhiTranslate="{{ weekdayNameKey }}"></div>
+        }
+    </div>
+    @for (week of weeks(); track week.id) {
+        <div class="week-row">
+            @for (day of week.days; track day.id) {
+                <div class="day-cell">
+                    @if (day.isInDisplayedMonth) {
+                        <jhi-calendar-day-badge [date]="day.date" />
+                        @if (day.eventsAndMetadata.length > 3) {
+                            @for (eventAndMetadata of day.firstTwoEventsAndMetadata; track eventAndMetadata.event.id) {
+                                <ng-container *ngTemplateOutlet="eventCell; context: { $implicit: eventAndMetadata }" />
+                            }
+                            <div class="more-events-label">+{{ day.eventsAndMetadata.length - 2 }} more</div>
+                        } @else {
+                            @for (eventAndMetadata of day.eventsAndMetadata; track eventAndMetadata.event.id) {
+                                <ng-container *ngTemplateOutlet="eventCell; context: { $implicit: eventAndMetadata }" />
+                            }
+                        }
+                    }
+                </div>
+            }
+        </div>
+    }
+</div>
+
+<ng-template #eventCell let-eventAndMetadata>
+    @let event = eventAndMetadata.event;
+    @let color = eventAndMetadata.color;
+    @let icon = eventAndMetadata.icon;
+    <div class="event-cell" [style.background-color]="color" (click)="eventDetailPopover.open($event, event)" [attr.data-testid]="event.title">
+        <div class="event-label">{{ event.title }}</div>
+        <fa-icon [icon]="icon" />
+    </div>
+</ng-template>
+
+<jhi-calendar-event-detail-popover-component #eventDetailPopover />
