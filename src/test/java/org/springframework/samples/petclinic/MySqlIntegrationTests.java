@@ -37,6 +37,8 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.mysql.MySQLContainer;
 import org.testcontainers.utility.DockerImageName;
+import org.springframework.samples.petclinic.vet.Vet;
+import java.util.Collection;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("mysql")
@@ -60,8 +62,10 @@ class MySqlIntegrationTests {
 
 	@Test
 	void testFindAll() {
-		vets.findAll();
-		vets.findAll(); // served from cache
+		Collection<Vet> result1 = vets.findAll();
+		Collection<Vet> result2 = vets.findAll(); // served from cache
+
+		assertThat(result2).isNotNull().isEqualTo(result1);
 	}
 
 	@Test
