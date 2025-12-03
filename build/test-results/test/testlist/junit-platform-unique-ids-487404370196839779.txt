@@ -1,3 +1,0 @@
-[engine:junit-jupiter]/[class:org.springframework.samples.petclinic.owner.PetTypeFormatterTests]/[method:shouldThrowParseException()]
-[engine:junit-jupiter]/[class:org.springframework.samples.petclinic.owner.PetTypeFormatterTests]/[method:testPrint()]
-[engine:junit-jupiter]/[class:org.springframework.samples.petclinic.owner.PetTypeFormatterTests]/[method:shouldParse()]
