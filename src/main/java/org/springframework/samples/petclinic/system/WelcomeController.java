@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 class WelcomeController {
 
 	private final VetRepository vetRepository;
+
 	private final OwnerRepository ownerRepository;
 
 	public WelcomeController(VetRepository vetRepository, OwnerRepository ownerRepository) {
@@ -49,19 +50,17 @@ class WelcomeController {
 
 		// Total de pets ativos
 		List<Owner> owners = ownerRepository.findAll();
-		long totalPets = owners.stream()
-				.mapToLong(owner -> owner.getPets().size())
-				.sum();
+		long totalPets = owners.stream().mapToLong(owner -> owner.getPets().size()).sum();
 
 		// Próximas 5 visitas agendadas
 		LocalDate today = LocalDate.now();
 		List<Visit> upcomingVisits = owners.stream()
-				.flatMap(owner -> owner.getPets().stream())
-				.flatMap(pet -> pet.getVisits().stream())
-				.filter(visit -> !visit.getDate().isBefore(today))
-				.sorted((v1, v2) -> v1.getDate().compareTo(v2.getDate()))
-				.limit(5)
-				.collect(Collectors.toList());
+			.flatMap(owner -> owner.getPets().stream())
+			.flatMap(pet -> pet.getVisits().stream())
+			.filter(visit -> !visit.getDate().isBefore(today))
+			.sorted((v1, v2) -> v1.getDate().compareTo(v2.getDate()))
+			.limit(5)
+			.collect(Collectors.toList());
 
 		model.addAttribute("totalVets", totalVets);
 		model.addAttribute("totalOwners", totalOwners);
