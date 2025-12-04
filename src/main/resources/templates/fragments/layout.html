@@ -60,6 +60,26 @@
           </li>
 
         </ul>
+
+        <!-- Language Switcher -->
+        <ul class="nav navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <span class="fa fa-globe"></span> Language
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+              <li><a class="dropdown-item" th:href="@{''(lang='en')}">🇬🇧 English</a></li>
+              <li><a class="dropdown-item" th:href="@{''(lang='pt')}">🇧🇷 Português</a></li>
+              <li><a class="dropdown-item" th:href="@{''(lang='es')}">🇪🇸 Español</a></li>
+              <li><a class="dropdown-item" th:href="@{''(lang='de')}">🇩🇪 Deutsch</a></li>
+              <li><a class="dropdown-item" th:href="@{''(lang='ko')}">🇰🇷 한국어</a></li>
+              <li><a class="dropdown-item" th:href="@{''(lang='ru')}">🇷🇺 Русский</a></li>
+              <li><a class="dropdown-item" th:href="@{''(lang='tr')}">🇹🇷 Türkçe</a></li>
+              <li><a class="dropdown-item" th:href="@{''(lang='fa')}">🇮🇷 فارسی</a></li>
+            </ul>
+          </li>
+        </ul>
       </div>
     </div>
   </nav>

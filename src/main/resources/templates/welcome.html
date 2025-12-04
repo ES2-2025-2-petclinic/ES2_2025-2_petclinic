@@ -5,7 +5,85 @@
 <body>
 
   <h2 th:text="#{welcome}">Welcome</h2>
-  <div class="row">
+
+  <!-- Dashboard Statistics Cards -->
+  <div class="row mb-4">
+    <!-- Total Veterinários -->
+    <div class="col-md-3">
+      <div class="card text-white bg-primary mb-3">
+        <div class="card-header">
+          <i class="fas fa-user-md"></i> <span th:text="#{dashboard.vets}">Veterinarians</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title" th:text="${totalVets}">0</h3>
+          <p class="card-text" th:text="#{dashboard.totalRegistered}">Total registered</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Total Proprietários -->
+    <div class="col-md-3">
+      <div class="card text-white bg-success mb-3">
+        <div class="card-header">
+          <i class="fas fa-users"></i> <span th:text="#{dashboard.owners}">Owners</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title" th:text="${totalOwners}">0</h3>
+          <p class="card-text" th:text="#{dashboard.totalRegistered}">Total registered</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Total Pets -->
+    <div class="col-md-3">
+      <div class="card text-white bg-info mb-3">
+        <div class="card-header">
+          <i class="fas fa-paw"></i> <span th:text="#{dashboard.pets}">Pets</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title" th:text="${totalPets}">0</h3>
+          <p class="card-text" th:text="#{dashboard.totalActive}">Total active</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Próximas Visitas -->
+    <div class="col-md-3">
+      <div class="card text-white bg-warning mb-3">
+        <div class="card-header">
+          <i class="fas fa-calendar-alt"></i> <span th:text="#{dashboard.upcomingVisits}">Upcoming Visits</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title" th:text="${#lists.size(upcomingVisits)}">0</h3>
+          <p class="card-text" th:text="#{dashboard.scheduled}">Scheduled</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Upcoming Visits Table -->
+  <div class="row" th:if="${not #lists.isEmpty(upcomingVisits)}">
+    <div class="col-md-12">
+      <h3 th:text="#{dashboard.upcomingVisitsTable}">Upcoming Scheduled Visits</h3>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th th:text="#{date}">Date</th>
+            <th th:text="#{description}">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="visit : ${upcomingVisits}">
+            <td th:text="${#temporals.format(visit.date, 'dd/MM/yyyy')}">01/01/2024</td>
+            <td th:text="${visit.description}">Routine checkup</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Original Welcome Image -->
+  <div class="row mt-4">
     <div class="col-md-12">
       <img class="img-responsive" src="../static/resources/images/pets.png" th:src="@{/resources/images/pets.png}" />
     </div>
