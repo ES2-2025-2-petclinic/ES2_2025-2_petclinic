@@ -4,9 +4,5 @@
 build/
 gradle/
 target/
-./mvnw
-./mvwn
-mvnw
-mvnw.cmd
 gradlew
 gradlew.bat
