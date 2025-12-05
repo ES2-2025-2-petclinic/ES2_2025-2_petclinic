@@ -60,7 +60,7 @@ class WelcomeController {
 				.filter(visit -> visit.getDate() != null && !visit.getDate().isBefore(today))
 				.sorted(Comparator.comparing(Visit::getDate))
 				.limit(5)
-				.collect(Collectors.toList());
+				.toList();
 		}
 
 		model.addAttribute("totalVets", totalVets);

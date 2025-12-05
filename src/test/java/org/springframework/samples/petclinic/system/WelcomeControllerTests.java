@@ -81,4 +81,22 @@ class WelcomeControllerTests {
 		verify(model).addAttribute(eq("upcomingVisits"), eq(Collections.emptyList()));
 	}
 
+	@Test
+	void shouldHandleNullOwners() {
+		given(vetRepository.findAll()).willReturn(Collections.emptyList());
+		given(ownerRepository.count()).willReturn(0L);
+
+		given(ownerRepository.findAll()).willReturn(null);
+
+		String viewName = welcomeController.welcome(model);
+
+		assertThat(viewName).isEqualTo("welcome");
+
+		verify(model).addAttribute("totalVets", 0L);
+		verify(model).addAttribute("totalOwners", 0L);
+
+		verify(model).addAttribute("totalPets", 0L);
+		verify(model).addAttribute(eq("upcomingVisits"), eq(Collections.emptyList()));
+	}
+
 }
