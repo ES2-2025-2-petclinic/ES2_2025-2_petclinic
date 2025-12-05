@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      https://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -97,6 +97,66 @@ class PetControllerTests {
 			.perform(post("/owners/{ownerId}/pets/new", TEST_OWNER_ID).param("name", "Betty")
 				.param("type", "hamster")
 				.param("birthDate", "2015-02-12"))
+			.andExpect(status().is3xxRedirection())
+			.andExpect(view().name("redirect:/owners/{ownerId}"));
+	}
+
+	@Test
+	void testLoadPetWithVisitOwnerNotFound() throws Exception {
+		int NON_EXISTENT_OWNER_ID = 999;
+		given(this.owners.findById(NON_EXISTENT_OWNER_ID)).willReturn(Optional.empty());
+
+		// Attempts to access any pet-related URL with a non-existent owner ID should
+		// result in an Exception
+		// due to IllegalArgumentException thrown in the controller
+		org.junit.jupiter.api.Assertions.assertThrows(Exception.class, () -> {
+			mockMvc.perform(get("/owners/{ownerId}/pets/new", NON_EXISTENT_OWNER_ID));
+		});
+	}
+
+	@Test
+	void testLoadPetWithVisitPetNotFound() throws Exception {
+		// Arrange
+		// The setup provides owner with ID 1, pets with IDs 1 and 2.
+		// Using a different ID (e.g., 999) will cause owner.getPet(petId) to return null.
+		int NON_EXISTENT_PET_ID = 999;
+
+		// The controller returns null for "pet", which causes a template error when
+		// rendering.
+		// We assert that an exception occurs.
+		org.junit.jupiter.api.Assertions.assertThrows(Exception.class, () -> {
+			mockMvc.perform(get("/owners/{ownerId}/pets/{petId}/edit", TEST_OWNER_ID, NON_EXISTENT_PET_ID));
+		});
+	}
+
+	@Test
+	void testProcessUpdateFormSameName() throws Exception {
+		mockMvc
+			.perform(post("/owners/{ownerId}/pets/{petId}/edit", TEST_OWNER_ID, TEST_PET_ID).param("name", "petty")
+				.param("type", "hamster")
+				.param("birthDate", "2015-02-12"))
+			.andExpect(status().is3xxRedirection())
+			.andExpect(view().name("redirect:/owners/{ownerId}"));
+	}
+
+	@Test
+	void testProcessUpdateFormWithNotExistingPetId() throws Exception {
+		mockMvc
+			.perform(post("/owners/{ownerId}/pets/{petId}/edit", TEST_OWNER_ID, TEST_PET_ID).param("name", "Betty")
+				.param("type", "hamster")
+				.param("birthDate", "2015-02-12")
+				.param("id", "99"))
+			.andExpect(status().is3xxRedirection())
+			.andExpect(view().name("redirect:/owners/{ownerId}"));
+	}
+
+	@Test
+	void testProcessCreationFormWithExistingId() throws Exception {
+		mockMvc
+			.perform(post("/owners/{ownerId}/pets/new", TEST_OWNER_ID).param("name", "Betty")
+				.param("type", "hamster")
+				.param("birthDate", "2015-02-12")
+				.param("id", "99"))
 			.andExpect(status().is3xxRedirection())
 			.andExpect(view().name("redirect:/owners/{ownerId}"));
 	}
@@ -203,6 +263,39 @@ class PetControllerTests {
 				.andExpect(model().attributeHasErrors("pet"))
 				.andExpect(model().attributeHasFieldErrors("pet", "name"))
 				.andExpect(model().attributeHasFieldErrorCode("pet", "name", "required"))
+				.andExpect(view().name("pets/createOrUpdatePetForm"));
+		}
+
+		@Test
+		void testProcessUpdateFormWithFutureBirthDate() throws Exception {
+			LocalDate futureDate = LocalDate.now().plusDays(1);
+			mockMvc
+				.perform(post("/owners/{ownerId}/pets/{petId}/edit", TEST_OWNER_ID, TEST_PET_ID).param("name", "Betty")
+					.param("type", "hamster")
+					.param("birthDate", futureDate.toString()))
+				.andExpect(model().attributeHasNoErrors("owner"))
+				.andExpect(model().attributeHasErrors("pet"))
+				.andExpect(model().attributeHasFieldErrors("pet", "birthDate"))
+				.andExpect(model().attributeHasFieldErrorCode("pet", "birthDate", "typeMismatch.birthDate"))
+				.andExpect(status().isOk())
+				.andExpect(view().name("pets/createOrUpdatePetForm"));
+		}
+
+		@Test
+		void testProcessUpdateFormWithDuplicateName() throws Exception {
+			int ANOTHER_PET_ID = TEST_PET_ID + 1; // Pet with name "doggy"
+			String EXISTING_NAME = "petty"; // Name of pet with ID 1
+
+			mockMvc
+				.perform(post("/owners/{ownerId}/pets/{petId}/edit", TEST_OWNER_ID, ANOTHER_PET_ID)
+					.param("name", EXISTING_NAME)
+					.param("type", "hamster")
+					.param("birthDate", "2015-02-12"))
+				.andExpect(model().attributeHasNoErrors("owner"))
+				.andExpect(model().attributeHasErrors("pet"))
+				.andExpect(model().attributeHasFieldErrors("pet", "name"))
+				.andExpect(model().attributeHasFieldErrorCode("pet", "name", "duplicate"))
+				.andExpect(status().isOk())
 				.andExpect(view().name("pets/createOrUpdatePetForm"));
 		}
 
