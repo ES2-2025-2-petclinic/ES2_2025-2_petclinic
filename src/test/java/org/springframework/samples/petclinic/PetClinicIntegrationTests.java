@@ -30,6 +30,8 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.samples.petclinic.vet.VetRepository;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.samples.petclinic.vet.Vet;
+import java.util.Collection;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class PetClinicIntegrationTests {
@@ -45,8 +47,10 @@ public class PetClinicIntegrationTests {
 
 	@Test
 	void testFindAll() {
-		vets.findAll();
-		vets.findAll(); // served from cache
+		Collection<Vet> result1 = vets.findAll();
+		Collection<Vet> result2 = vets.findAll(); // served from cache
+
+		assertThat(result2).isNotNull().isEqualTo(result1);
 	}
 
 	@Test

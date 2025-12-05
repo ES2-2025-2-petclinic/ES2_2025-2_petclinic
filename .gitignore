@@ -1,4 +1,12 @@
 .gradle/
 .idea/
 .git/
-
+build/
+gradle/
+target/
+./mvnw
+./mvwn
+mvnw
+mvnw.cmd
+gradlew
+gradlew.bat

@@ -47,6 +47,8 @@ import org.springframework.samples.petclinic.vet.VetRepository;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.client.RestTemplate;
 import org.testcontainers.DockerClientFactory;
+import org.springframework.samples.petclinic.vet.Vet;
+import java.util.Collection;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, properties = { "spring.docker.compose.skip.in-tests=false", //
 		"spring.docker.compose.start.arguments=--force-recreate,--renew-anon-volumes,postgres" })
@@ -80,8 +82,10 @@ public class PostgresIntegrationTests {
 
 	@Test
 	void testFindAll() throws Exception {
-		vets.findAll();
-		vets.findAll(); // served from cache
+		Collection<Vet> result1 = vets.findAll();
+		Collection<Vet> result2 = vets.findAll(); // served from cache
+
+		assertThat(result2).isNotNull().isEqualTo(result1);
 	}
 
 	@Test
