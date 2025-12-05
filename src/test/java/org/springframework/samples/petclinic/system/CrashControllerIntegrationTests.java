@@ -94,6 +94,10 @@ class CrashControllerIntegrationTests {
 
 	@SpringBootApplication(exclude = { DataSourceAutoConfiguration.class,
 			DataSourceTransactionManagerAutoConfiguration.class, HibernateJpaAutoConfiguration.class })
+	@org.springframework.context.annotation.ComponentScan(
+			excludeFilters = @org.springframework.context.annotation.ComponentScan.Filter(
+					type = org.springframework.context.annotation.FilterType.ASSIGNABLE_TYPE,
+					classes = WelcomeController.class))
 	static class TestConfiguration {
 
 	}
