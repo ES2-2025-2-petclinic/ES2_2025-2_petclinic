@@ -17,16 +17,26 @@
 package org.springframework.samples.petclinic;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest
 class PetClinicApplicationTests {
 
+	@Autowired
+	private ApplicationContext applicationContext;
+
 	@Test
 	void contextLoads() {
-		// Este método vazio é suficiente para verificar se o contexto da aplicação
-		// carrega sem lançar exceções. Se houver falhas na configuração,
-		// na criação de beans ou no escaneamento de componentes, o teste falhará.
+		assertThat(applicationContext).isNotNull();
+	}
+
+	@Test
+	void testMain() {
+		PetClinicApplication.main(new String[] { "--server.port=0" });
 	}
 
 }
