@@ -3,7 +3,7 @@
 <html lang="en-US" xmlns:th="https://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
 
 <head>
-    <title>Owner Information</title>
+  <title th:text="#{title.ownerDetails}">Owner Information</title>
 </head>
 
 <body>
@@ -61,8 +61,7 @@
           <dt th:text="#{image}">Image</dt>
           <dd>
             <img th:src="@{/owners/{ownerId}/pets/{petId}/image(ownerId=${owner.id},petId=${pet.id})}"
-              style="max-width: 100px; max-height: 100px;"
-              th:alt="#{pet.image.description}" />
+              style="max-width: 100px; max-height: 100px;" th:alt="#{pet.image.description}" />
           </dd>
         </dl>
       </td>
