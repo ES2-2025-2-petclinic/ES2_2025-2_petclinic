@@ -58,6 +58,10 @@ public class Pet extends NamedEntity {
 	@OrderBy("date ASC")
 	private final Set<Visit> visits = new LinkedHashSet<>();
 
+	@Column(name = "image")
+	@jakarta.persistence.Lob
+	private byte[] image;
+
 	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
 	}
@@ -80,6 +84,14 @@ public class Pet extends NamedEntity {
 
 	public void addVisit(Visit visit) {
 		getVisits().add(visit);
+	}
+
+	public byte[] getImage() {
+		return this.image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
 }

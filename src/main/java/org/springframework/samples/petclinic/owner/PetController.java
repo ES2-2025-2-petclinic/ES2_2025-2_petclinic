@@ -36,6 +36,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import jakarta.validation.Valid;
 
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.util.StreamUtils;
 
 /**
  * @author Juergen Hoeller
@@ -104,7 +111,16 @@ class PetController {
 
 	@PostMapping("/pets/new")
 	public String processCreationForm(Owner owner, @Valid Pet pet, BindingResult result,
-			RedirectAttributes redirectAttributes) {
+			RedirectAttributes redirectAttributes, @RequestParam("imageFile") MultipartFile imageFile) {
+
+		if (!imageFile.isEmpty()) {
+			try {
+				pet.setImage(imageFile.getBytes());
+			}
+			catch (IOException e) {
+				result.rejectValue("image", "error.image", "Could not upload image");
+			}
+		}
 
 		if (StringUtils.hasText(pet.getName()) && pet.isNew() && owner.getPet(pet.getName(), true) != null)
 			result.rejectValue("name", "duplicate", "already exists");
@@ -131,7 +147,16 @@ class PetController {
 
 	@PostMapping("/pets/{petId}/edit")
 	public String processUpdateForm(Owner owner, @Valid Pet pet, BindingResult result,
-			RedirectAttributes redirectAttributes) {
+			RedirectAttributes redirectAttributes, @RequestParam("imageFile") MultipartFile imageFile) {
+
+		if (!imageFile.isEmpty()) {
+			try {
+				pet.setImage(imageFile.getBytes());
+			}
+			catch (IOException e) {
+				result.rejectValue("image", "error.image", "Could not upload image");
+			}
+		}
 
 		String petName = pet.getName();
 
@@ -171,11 +196,43 @@ class PetController {
 			existingPet.setName(pet.getName());
 			existingPet.setBirthDate(pet.getBirthDate());
 			existingPet.setType(pet.getType());
+			if (pet.getImage() != null && pet.getImage().length > 0) {
+				existingPet.setImage(pet.getImage());
+			}
 		}
 		else {
 			owner.addPet(pet);
 		}
 		this.owners.save(owner);
+	}
+
+	@GetMapping("/pets/{petId}/image")
+	public ResponseEntity<byte[]> getPetImage(@PathVariable("ownerId") int ownerId, @PathVariable("petId") int petId) {
+		Optional<Owner> optionalOwner = this.owners.findById(ownerId);
+		if (optionalOwner.isPresent()) {
+			Pet pet = optionalOwner.get().getPet(petId);
+			if (pet != null) {
+				byte[] image = pet.getImage();
+				if (image != null && image.length > 0) {
+					return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(image);
+				}
+				try {
+					String typeName = pet.getType().getName().toLowerCase();
+					ClassPathResource resource = new ClassPathResource(
+							"static/resources/images/pets/" + typeName + ".png");
+					if (!resource.exists()) {
+						resource = new ClassPathResource("static/resources/images/pets/default.png");
+					}
+					if (resource.exists()) {
+						byte[] defaultImage = StreamUtils.copyToByteArray(resource.getInputStream());
+						return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(defaultImage);
+					}
+				}
+				catch (IOException e) {
+				}
+			}
+		}
+		return ResponseEntity.notFound().build();
 	}
 
 }
